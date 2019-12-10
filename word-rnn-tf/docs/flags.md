@@ -1,44 +1,42 @@
-Here we'll describe in detail the full set of command line flags available for preprocessing, training, and sampling.
+Here we'll describe in detail the full set of command line flags available for preprocessing, training, and sampling scripts. Each argument is shown in the following format:
 
-# Preprocessing
-The preprocessing script `scripts/preprocess.py` accepts the following command-line flags:
-- `--input_txt`: Path to the text file to be used for training. Default is the `tiny-shakespeare.txt` dataset.
-- `--output_h5`: Path to the HDF5 file where preprocessed data should be written.
-- `--output_json`: Path to the JSON file where preprocessed data should be written.
-- `--val_frac`: What fraction of the data to use as a validation set; default is `0.1`.
-- `--test_frac`: What fraction of the data to use as a test set; default is `0.1`.
-- `--quiet`: If you pass this flag then no output will be printed to the console.
+`argument`: (Default) some description
+
+## train.py
+
+`--data_dir`: ('data/tinyshakespeare') Data directory containing input.txt (textfile which we will train our model on)
+
+`--input_encoding`: (None) Character encoding of input.txt, from [here](https://docs.python.org/3/library/codecs.html#standard-encodings)
+
+`--log_dir`: ('logs') Directory containing tensorboard logs
+
+`--save_dir`: ('save') Directory to store checkpointed models
+
+`--rnn_size`: (256) The number of hidden units in the RNN. Larger values (256 or 512) are commonly used to learn more powerful models and for bigger datasets, but this will significantly slow down computation.
+
+`--num_layers`: (2) The number of layers present in the RNN
+
+`--model`: ('lstm') The type of recurrent network to use; either 'lstm' or 'rnn'. 'lstm' is slower but better.
+
+`--batch_size`: (50) Number of sequences to use in a minibatch
+
+`--seq_length`: (25) Number of timesteps for which the recurrent network is unrolled for backpropagation through time
 
 
-# Training
-The training script `train.py` accepts the following command-line flags:
+`--num_epochs`: (50) How many training epochs to use for optimization. To many epochs can cause overfitting
 
-| Argument                          	| Default                	| Description                                                                                                                                                                                                                                                                                                                                                                                                            	|
-|-----------------------------------	|------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| `--data_dir`                      	| 'data/tinyshakespeare' 	| Data directory containing input.txt (textfile which we will train our model on)                                                                                                                                                                                                                                                                                                                                        	|
-| `--input_encoding`                	| None                   	| Character encoding of input.txt, from [here](https://docs.python.org/3/library/codecs.html#standard-encodings)                                                                                                                                                                                                                                                                                                         	|
-| `--log_dir`                       	| 'logs'                 	| Directory containing tensorboard logs                                                                                                                                                                                                                                                                                                                                                                                  	|
-| `--save_dir`                      	| 'save'                 	| Directory to store checkpointed models                                                                                                                                                                                                                                                                                                                                                                                 	|
-| `--rnn_size`                      	| 256                    	| The number of hidden units in the RNN. Larger values (256 or 512) are commonly used to learn more powerful models and for bigger datasets, but this will significantly slow down computation.                                                                                                                                                                                                                          	|
-| `--num_layers`                    	| 2                      	| The number of layers present in the RNN                                                                                                                                                                                                                                                                                                                                                                                	|
-| `--model`                         	| 'lstm'                 	| The type of recurrent network to use; either 'lstm' or 'rnn'. 'lstm' is slower but better.                                                                                                                                                                                                                                                                                                                             	|
-| `--batch_size`                    	| 50                     	| Number of sequences to use in a minibatch                                                                                                                                                                                                                                                                                                                                                                              	|
-| `--seq_length`                    	| 25                     	| Number of timesteps for which the recurrent network is unrolled for backpropagation through time                                                                                                                                                                                                                                                                                                                       	|
-| `--num_epochs`                    	| 50                     	| How many training epochs to use for optimization. To many epochs can cause overfitting                                                                                                                                                                                                                                                                                                                                 	|
-| `--save_every`                    	| 1000                   	| How often to save intermediate checkpoints. Set to 0 to disable intermediate checkpointing. Note that we always save a checkpoint on the final iteration of training.                                                                                                                                                                                                                                                  	|
-| `--grad_clip`                     	| 5.0                    	| Maximum value for gradients. Set to 0 to disable gradient clipping.                                                                                                                                                                                                                                                                                                                                                    	|
-| `--learning_rate`                 	| 0.002                  	| Learning rate for optimization.                                                                                                                                                                                                                                                                                                                                                                                        	|
-| `--decay_rate`                    	| 0.97                   	| Decay rate for rmsprop.                                                                                                                                                                                                                                                                                                                                                                                                	|
-| `--gpu_mem`                       	| 0.666                  	| % of GPU memory to be allocated to this process.                                                                                                                                                                                                                                                                                                                                                                       	|
-| `--init_from`                     	| None                   	| To continue training from saved model at this path. Path must contain files saved by previous training process:     'config.pkl'        : configuration;     'words_vocab.pkl'   : vocabulary      'checkpoint'        : paths to model file(s) (created by tf). Note: this file contains absolute paths, be careful when moving files around;     'model.ckpt-*'      : file(s) with model definition (created by tf) 	|
+`--save_every`: (1000) How often to save intermediate checkpoints. Set to 0 to disable intermediate checkpointing. Note that we always save a checkpoint on the final iteration of training.
 
-# Sampling
-The sampling script `sample.lua` accepts the following command-line flags:
-- `-checkpoint`: Path to a `.t7` checkpoint file from `train.lua`
-- `-length`: The length of the generated text, in characters.
-- `-start_text`: You can optionally start off the generation process with a string; if this is provided the start text will be processed by the trained network before we start sampling. Without this flag, the first character is chosen randomly.
-- `-sample`: Set this to 1 to sample from the next-character distribution at each timestep; set to 0 to instead just pick the argmax at every timestep. Sampling tends to produce more interesting results.
-- `-temperature`: Softmax temperature to use when sampling; default is 1. Higher temperatures give noiser samples. Not used when using argmax sampling (`sample` set to 0).
-- `-gpu`: The ID of the GPU to use (zero-indexed). Default is 0. Set this to -1 to run in CPU-only mode.
-- `-gpu_backend`: The GPU backend to use; either `cuda` or `opencl`. Default is `cuda`.
-- `-verbose`: By default just the sampled text is printed to the console. Set this to 1 to also print some diagnostic information.
+`--grad_clip`: (5.0) Maximum value for gradients. Set to 0 to disable gradient clipping.
+
+`--learning_rate`: (0.002) Learning rate for optimization.
+
+`--decay_rate`: (0.97) Decay rate for rmsprop.
+
+`--gpu_mem`: (0.666) % of GPU memory to be allocated to this process.
+
+`--init_from`: (None) To continue training from saved model at this path. Path must contain files saved by previous training process:
+    - 'config.pkl'        : configuration;
+    - 'words_vocab.pkl'   : vocabulary 
+    - 'checkpoint'        : paths to model file(s) (created by tf). Note: this file contains absolute paths, be careful when moving files around;
+    - 'model.ckpt-*'      : file(s) with model definition (created by tf)
