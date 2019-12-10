@@ -1,29 +1,31 @@
+# Flags
+
 Here we'll describe in detail the full set of command line flags available for preprocessing, training, and sampling scripts. Each argument is shown in the following format:
 
 `argument`: (Default) some description
 
 ## train.py
 
-`--data_dir`: ('data/tinyshakespeare') Data directory containing input.txt (textfile which we will train our model on)
+`--data_dir`: ('data/tinyshakespeare') Data directory containing input.txt (textfile which we will train our model on).
 
-`--input_encoding`: (None) Character encoding of input.txt, from [here](https://docs.python.org/3/library/codecs.html#standard-encodings)
+`--input_encoding`: (None) Character encoding of input.txt, from [here](https://docs.python.org/3/library/codecs.html#standard-encodings).
 
-`--log_dir`: ('logs') Directory containing tensorboard logs
+`--log_dir`: ('logs') Directory containing tensorboard logs.
 
-`--save_dir`: ('save') Directory to store checkpointed models
+`--save_dir`: ('save') Directory to store checkpointed models.
 
 `--rnn_size`: (256) The number of hidden units in the RNN. Larger values (256 or 512) are commonly used to learn more powerful models and for bigger datasets, but this will significantly slow down computation.
 
-`--num_layers`: (2) The number of layers present in the RNN
+`--num_layers`: (2) The number of layers present in the RNN.
 
 `--model`: ('lstm') The type of recurrent network to use; either 'lstm' or 'rnn'. 'lstm' is slower but better.
 
-`--batch_size`: (50) Number of sequences to use in a minibatch
+`--batch_size`: (50) Number of sequences to use in a minibatch.
 
-`--seq_length`: (25) Number of timesteps for which the recurrent network is unrolled for backpropagation through time
+`--seq_length`: (25) Number of timesteps for which the recurrent network is unrolled for backpropagation through time.
 
 
-`--num_epochs`: (50) How many training epochs to use for optimization. To many epochs can cause overfitting
+`--num_epochs`: (50) How many training epochs to use for optimization. To many epochs can cause overfitting.
 
 `--save_every`: (1000) How often to save intermediate checkpoints. Set to 0 to disable intermediate checkpointing. Note that we always save a checkpoint on the final iteration of training.
 
