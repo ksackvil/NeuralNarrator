@@ -15,12 +15,12 @@ class Model():
 
         if args.model == 'rnn':
             # cell_fn = rnn.BasicRNNCell
-            cell_fn = rnn_cell.LSTMCell(name='basic_lstm_cell')
+            cell_fn = tf.nn.rnn_cell.LSTMCell(name='basic_lstm_cell')
         elif args.model == 'gru':
             cell_fn = rnn.GRUCell
         elif args.model == 'lstm':
             # cell_fn = rnn.BasicLSTMCell
-            cell_fn = rnn_cell.LSTMCell(name='basic_lstm_cell')
+            cell_fn = tf.nn.rnn_cell.LSTMCell(name='basic_lstm_cell')
         else:
             raise Exception("model type not supported: {}".format(args.model))
 
