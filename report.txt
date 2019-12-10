@@ -1,0 +1,148 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 9 files
+Detected 7 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: word-rnn-tensorflow/model.py
+--------------------------------------------------------------------------------
+word-rnn-tensorflow/model.py:54:24: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+word-rnn-tensorflow/model.py:56:24: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+word-rnn-tensorflow/model.py:59:28: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+word-rnn-tensorflow/model.py:60:34: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+word-rnn-tensorflow/model.py:66:19: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+--------------------------------------------------------------------------------
+File: word-rnn-tensorflow/train.py
+--------------------------------------------------------------------------------
+word-rnn-tensorflow/train.py:129:20: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: word-rnn-tensorflow/utils.py
+--------------------------------------------------------------------------------
+word-rnn-tensorflow/utils.py:82:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+================================================================================
+Detailed log follows:
+
+================================================================================
+================================================================================
+Input tree: 'word-rnn-tensorflow/'
+================================================================================
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/train.py'
+ outputting to 'word-rnn-tensorflow-two/train.py'
+--------------------------------------------------------------------------------
+
+90:13: INFO: tf.summary.merge_all requires manual check. The TF 1.x summary API cannot be automatically migrated to TF 2.0, so symbols have been converted to tf.compat.v1.summary.* and must be migrated manually. Typical usage will only require changes to the summary writing logic, not to individual calls like scalar(). For examples of the new summary API, see the Effective TF 2.0 migration document or check the TF 2.0 TensorBoard tutorials.
+90:13: INFO: Renamed 'tf.summary.merge_all' to 'tf.compat.v1.summary.merge_all'
+91:19: INFO: tf.summary.FileWriter requires manual check. The TF 1.x summary API cannot be automatically migrated to TF 2.0, so symbols have been converted to tf.compat.v1.summary.* and must be migrated manually. Typical usage will only require changes to the summary writing logic, not to individual calls like scalar(). For examples of the new summary API, see the Effective TF 2.0 migration document or check the TF 2.0 TensorBoard tutorials.
+91:19: INFO: Renamed 'tf.summary.FileWriter' to 'tf.compat.v1.summary.FileWriter'
+92:18: INFO: Renamed 'tf.GPUOptions' to 'tf.compat.v1.GPUOptions'
+94:9: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+94:27: INFO: Renamed 'tf.ConfigProto' to 'tf.compat.v1.ConfigProto'
+96:8: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+97:16: INFO: Renamed 'tf.train.Saver' to 'tf.compat.v1.train.Saver'
+97:31: INFO: Renamed 'tf.global_variables' to 'tf.compat.v1.global_variables'
+102:21: INFO: Renamed 'tf.assign' to 'tf.compat.v1.assign'
+129:20: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/model.py'
+ outputting to 'word-rnn-tensorflow-two/model.py'
+--------------------------------------------------------------------------------
+
+32:26: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+33:23: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+36:36: INFO: Renamed 'tf.assign' to 'tf.compat.v1.assign'
+39:8: INFO: tf.summary.scalar requires manual check. The TF 1.x summary API cannot be automatically migrated to TF 2.0, so symbols have been converted to tf.compat.v1.summary.* and must be migrated manually. Typical usage will only require changes to the summary writing logic, not to individual calls like scalar(). For examples of the new summary API, see the Effective TF 2.0 migration document or check the TF 2.0 TensorBoard tutorials.
+39:8: INFO: Renamed 'tf.summary.scalar' to 'tf.compat.v1.summary.scalar'
+43:17: INFO: `name` passed to `name_scope`. Because you may be re-entering an existing scope, it is not safe to convert automatically,  the v2 name_scope does not support re-entering scopes by name.
+
+43:17: INFO: Renamed 'tf.name_scope' to 'tf.compat.v1.name_scope'
+44:23: INFO: Added keywords to args of function 'tf.reduce_mean'
+45:16: INFO: tf.summary.scalar requires manual check. The TF 1.x summary API cannot be automatically migrated to TF 2.0, so symbols have been converted to tf.compat.v1.summary.* and must be migrated manually. Typical usage will only require changes to the summary writing logic, not to individual calls like scalar(). For examples of the new summary API, see the Effective TF 2.0 migration document or check the TF 2.0 TensorBoard tutorials.
+45:16: INFO: Renamed 'tf.summary.scalar' to 'tf.compat.v1.summary.scalar'
+49:16: INFO: tf.summary.scalar requires manual check. The TF 1.x summary API cannot be automatically migrated to TF 2.0, so symbols have been converted to tf.compat.v1.summary.* and must be migrated manually. Typical usage will only require changes to the summary writing logic, not to individual calls like scalar(). For examples of the new summary API, see the Effective TF 2.0 migration document or check the TF 2.0 TensorBoard tutorials.
+49:16: INFO: Renamed 'tf.summary.scalar' to 'tf.compat.v1.summary.scalar'
+49:41: INFO: Added keywords to args of function 'tf.reduce_max'
+50:16: INFO: tf.summary.scalar requires manual check. The TF 1.x summary API cannot be automatically migrated to TF 2.0, so symbols have been converted to tf.compat.v1.summary.* and must be migrated manually. Typical usage will only require changes to the summary writing logic, not to individual calls like scalar(). For examples of the new summary API, see the Effective TF 2.0 migration document or check the TF 2.0 TensorBoard tutorials.
+50:16: INFO: Renamed 'tf.summary.scalar' to 'tf.compat.v1.summary.scalar'
+50:41: INFO: Added keywords to args of function 'tf.reduce_min'
+53:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+54:24: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+54:24: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+56:24: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+56:24: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+59:28: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+59:28: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+60:34: INFO: Added keywords to args of function 'tf.nn.embedding_lookup'
+60:34: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+65:43: INFO: Added keywords to args of function 'tf.argmax'
+66:19: INFO: Added keywords to args of function 'tf.nn.embedding_lookup'
+66:19: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+76:20: INFO: Added keywords to args of function 'tf.reduce_sum'
+77:8: INFO: tf.summary.scalar requires manual check. The TF 1.x summary API cannot be automatically migrated to TF 2.0, so symbols have been converted to tf.compat.v1.summary.* and must be migrated manually. Typical usage will only require changes to the summary writing logic, not to individual calls like scalar(). For examples of the new summary API, see the Effective TF 2.0 migration document or check the TF 2.0 TensorBoard tutorials.
+77:8: INFO: Renamed 'tf.summary.scalar' to 'tf.compat.v1.summary.scalar'
+80:16: INFO: Renamed 'tf.trainable_variables' to 'tf.compat.v1.trainable_variables'
+81:42: INFO: Added keywords to args of function 'tf.gradients'
+83:20: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/utils.py'
+ outputting to 'word-rnn-tensorflow-two/utils.py'
+--------------------------------------------------------------------------------
+
+82:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/beam.py'
+ outputting to 'word-rnn-tensorflow-two/beam.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/sample.py'
+ outputting to 'word-rnn-tensorflow-two/sample.py'
+--------------------------------------------------------------------------------
+
+41:9: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+42:8: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+43:16: INFO: Renamed 'tf.train.Saver' to 'tf.compat.v1.train.Saver'
+43:31: INFO: Renamed 'tf.global_variables' to 'tf.compat.v1.global_variables'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/tests/test_train.py'
+ outputting to 'word-rnn-tensorflow-two/tests/test_train.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/tests/test_beam.py'
+ outputting to 'word-rnn-tensorflow-two/tests/test_beam.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/tests/test_utils.py'
+ outputting to 'word-rnn-tensorflow-two/tests/test_utils.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'word-rnn-tensorflow/tests/test_example.py'
+ outputting to 'word-rnn-tensorflow-two/tests/test_example.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
