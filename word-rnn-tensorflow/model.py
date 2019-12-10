@@ -15,12 +15,13 @@ class Model():
 
         if args.model == 'rnn':
             # cell_fn = rnn.BasicRNNCell
-            cell_fn = rnn.LSTMCell
+            # cell_fn = rnn.LSTMCell
+            cell_fn = tf.keras.layers.LSTMCell
         elif args.model == 'gru':
             cell_fn = rnn.GRUCell
         elif args.model == 'lstm':
             # cell_fn = rnn.BasicLSTMCell
-            cell_fn = rnn.LSTMCell
+            cell_fn = tf.keras.layers.LSTMCell
         else:
             raise Exception("model type not supported: {}".format(args.model))
 
