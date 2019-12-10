@@ -42,3 +42,21 @@ Here we'll describe in detail the full set of command line flags available for p
     - 'words_vocab.pkl'   : vocabulary 
     - 'checkpoint'        : paths to model file(s) (created by tf). Note: this file contains absolute paths, be careful when moving files around;
     - 'model.ckpt-*'      : file(s) with model definition (created by tf)
+    
+## sample.py
+
+`--save_dir`: ('save') Directory to load stored checkpoint models from.
+
+`-n`: (200) Number of words to sample in characters.
+
+`--prime`: (' ') You can optionally start off the generation process with a string; if this is provided the start text will be processed by the trained network before we start sampling.
+
+`--pick`: (1) Set this to 1 for weighted pick, or 2 for beam search pick.
+
+`--width`: (4) Width of beam search.
+
+`--sample`: (1) Set this to 0 to use max at each timestep, 1 to sample at each timestep, 2 to sample on spaces.
+
+`--count` `-c`: (1) Number of samples to print.
+
+`--quiet` `-q`: (False) Suppress printing the prime text. 
